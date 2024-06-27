@@ -1,0 +1,33 @@
+<%= form_with(model: task, local: true) do |form| %>
+    <% if task.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(task.errors.count, "error") %> prohibited this task from being saved:</h2>
+  
+        <ul>
+        <% task.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+        </ul>
+      </div>
+    <% end %>
+  
+    <div class="field">
+      <%= form.label :title %>
+      <%= form.text_field :title, class: 'form-control', required: true %>
+    </div>
+  
+    <div class="field">
+      <%= form.label :description %>
+      <%= form.text_area :description, class: 'form-control' %>
+    </div>
+  
+    <div class="field">
+      <%= form.label :status %>
+      <%= form.select :status, options_for_select(['To Do', 'In Progress', 'Done'], task.status), {}, class: 'form-control' %>
+    </div>
+  
+    <div class="actions">
+      <%= form.submit class: 'btn btn-primary' %>
+    </div>
+  <% end %>
+  
